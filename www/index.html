@@ -37,6 +37,7 @@
             -webkit-user-select: none;
             user-select: none;
             height: 100vh;
+            height: 100dvh;
             box-sizing: border-box;
             overflow: hidden;
             
@@ -204,12 +205,65 @@
         .pts-b { color: var(--accent-red); }
         .round-col { color: #555; font-size: 0.9rem; }
         .limit-label {
-            text-align: center; color: #666; font-size: 0.65rem; 
+            text-align: center; color: #666; font-size: 0.65rem;
             font-weight: bold; margin-top: -5px; letter-spacing: 1px;
+        }
+
+        /* MODAL */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .modal-box {
+            background: #1c1c1e;
+            border: 1px solid #444;
+            border-radius: 20px;
+            padding: 28px 24px 20px;
+            max-width: 320px;
+            width: 100%;
+            text-align: center;
+        }
+        .modal-message { color: var(--text); font-size: 1.1rem; line-height: 1.5; margin-bottom: 22px; }
+        .modal-buttons { display: flex; gap: 10px; }
+        .modal-btn { flex: 1; padding: 13px; border: none; border-radius: 10px; font-size: 1rem; font-weight: 700; cursor: pointer; }
+        .modal-btn-ok { background: var(--gold); color: #000; }
+        .modal-btn-confirm { background: var(--accent-green); color: #000; }
+        .modal-btn-cancel { background: #3a3a3c; color: #bbb; }
+
+        /* TABLET */
+        @media (min-width: 768px) {
+            body { padding: 24px; }
+            .container { max-width: 780px; gap: 16px; }
+            .logo-icon { width: 64px; height: 64px; }
+            .logo-text { font-size: 2rem; }
+            .name-input { font-size: 1.3rem; padding: 12px; }
+            .score-value { font-size: 4.5rem; }
+            #pointInput { font-size: 2.2rem; padding: 12px; }
+            button.game-btn { padding: 16px; font-size: 0.95rem; }
+            .btn-top { padding: 8px 16px; font-size: 0.85rem; }
+            th { font-size: 0.8rem; padding: 12px; }
+            td { padding: 10px; font-size: 1.3rem; }
+            .modal-box { max-width: 420px; padding: 36px 32px 28px; }
+            .modal-message { font-size: 1.3rem; }
+            .modal-btn { padding: 16px; font-size: 1.1rem; }
         }
     </style>
 </head>
 <body>
+
+<div id="modal-overlay" class="modal-overlay" style="display:none">
+    <div class="modal-box">
+        <div id="modal-message" class="modal-message"></div>
+        <div id="modal-buttons" class="modal-buttons"></div>
+    </div>
+</div>
 
 <div class="container">
     <div class="logo-area">
@@ -282,6 +336,37 @@
 </div>
 
 <script>
+    function showAlert(msg, callback) {
+        const overlay = document.getElementById('modal-overlay');
+        document.getElementById('modal-message').innerText = msg;
+        const btns = document.getElementById('modal-buttons');
+        btns.innerHTML = '';
+        const ok = document.createElement('button');
+        ok.className = 'modal-btn modal-btn-ok';
+        ok.innerText = 'OK';
+        ok.onclick = () => { overlay.style.display = 'none'; if (callback) callback(); };
+        btns.appendChild(ok);
+        overlay.style.display = 'flex';
+    }
+
+    function showConfirm(msg, onConfirm) {
+        const overlay = document.getElementById('modal-overlay');
+        document.getElementById('modal-message').innerText = msg;
+        const btns = document.getElementById('modal-buttons');
+        btns.innerHTML = '';
+        const cancel = document.createElement('button');
+        cancel.className = 'modal-btn modal-btn-cancel';
+        cancel.innerText = lang === 'ES' ? 'Cancelar' : 'Cancel';
+        cancel.onclick = () => { overlay.style.display = 'none'; };
+        const confirm = document.createElement('button');
+        confirm.className = 'modal-btn modal-btn-confirm';
+        confirm.innerText = lang === 'ES' ? 'Confirmar' : 'Confirm';
+        confirm.onclick = () => { overlay.style.display = 'none'; onConfirm(); };
+        btns.appendChild(cancel);
+        btns.appendChild(confirm);
+        overlay.style.display = 'flex';
+    }
+
     let lang = 'EN';
     let bestOf = 5; 
     let tournament = { scoreA: 0, scoreB: 0, gamesA: 0, gamesB: 0, rounds: [] };
@@ -308,10 +393,10 @@
     }
 
     window.emergencyClear = function() {
-        if(confirm("Factory Reset? This deletes all data.")) {
+        showConfirm("Factory Reset? This deletes all data.", () => {
             localStorage.clear();
             location.reload();
-        }
+        });
     };
 
     const texts = {
@@ -412,28 +497,28 @@
         setTimeout(() => {
             const nA = document.getElementById('nameA').value || "Player 1";
             const nB = document.getElementById('nameB').value || "Player 2";
-            let winnerName = tournament.scoreA >= 200 ? nA : nB;
-            
-            alert("🎉 " + winnerName + " " + texts[lang].winMsg);
-            
+            const winnerName = tournament.scoreA >= 200 ? nA : nB;
+
             if(winningElement) winningElement.classList.remove('winner-anim');
-            tournament.scoreA = 0; 
-            tournament.scoreB = 0; 
+            tournament.scoreA = 0;
+            tournament.scoreB = 0;
             tournament.rounds = [];
-            
-            updateUI(); 
-            isProcessingWin = false; 
+            updateUI();
+            isProcessingWin = false;
             lockControls(false);
 
             const winsNeeded = Math.ceil(bestOf / 2);
-            if (tournament.gamesA >= winsNeeded || tournament.gamesB >= winsNeeded) {
-                setTimeout(() => {
-                    alert("🏆🏆🏆 " + texts[lang].champMsg + " " + winnerName + " 🏆🏆🏆");
-                    winHistory.push(winnerName);
-                    localStorage.setItem('dominoWinHistory', JSON.stringify(winHistory));
-                    fullReset(true);
-                }, 300);
-            }
+            const isTournamentOver = tournament.gamesA >= winsNeeded || tournament.gamesB >= winsNeeded;
+
+            showAlert("🎉 " + winnerName + " " + texts[lang].winMsg, () => {
+                if (isTournamentOver) {
+                    showAlert("🏆🏆🏆 " + texts[lang].champMsg + " " + winnerName + " 🏆🏆🏆", () => {
+                        winHistory.push(winnerName);
+                        localStorage.setItem('dominoWinHistory', JSON.stringify(winHistory));
+                        fullReset(true);
+                    });
+                }
+            });
         }, 800);
     }
 
@@ -485,11 +570,16 @@
     }
 
     window.fullReset = function(silent = false) {
-        if (silent || confirm("Reset entire tournament? / ¿Reiniciar torneo?")) {
+        if (silent) {
             tournament.scoreA = 0; tournament.scoreB = 0; tournament.rounds = [];
-            if (!silent) { tournament.gamesA = 0; tournament.gamesB = 0; }
             updateUI();
+            return;
         }
+        showConfirm("Reset entire tournament? / ¿Reiniciar torneo?", () => {
+            tournament.scoreA = 0; tournament.scoreB = 0; tournament.rounds = [];
+            tournament.gamesA = 0; tournament.gamesB = 0;
+            updateUI();
+        });
     };
 
     // --- STARTUP ---
