@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Domino Pro Anota</title>
+    <title>Domino Pro Scoreboard</title>
     
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#000000">
-    <meta name="apple-mobile-web-app-title" content="Domino Pro Anota">
+    <meta name="apple-mobile-web-app-title" content="Domino Pro Scoreboard">
     
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiBzdHlsZT0iYmFja2dyb3VuZC1jb2xvcjogIzAwMDAwMDsiPgogIDxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjQ4IiBmaWxsPSIjMDAwMDAwIiBzdHJva2U9IiNmZmQ3MDAiIHN0cm9rZS13aWR0aD0iMyIvPgogIDxyZWN0IHg9IjMyIiB5PSIzNSIgd2lkdGg9IjIwIiBoZWlnaHQ9IjQwIiB0cmFuc2Zvcm09InJvdGF0ZSgtMzAgNDIgNTUpIiBmaWxsPSIjMzBkMTU4IiByeD0iMiIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPGNpcmNsZSBjeD0iMzgiIGN5PSI0OCIgcj0iMiIgZmlsbD0id2hpdGUiLz4KICA8Y2lyY2xlIGN4PSI0NiIgY3k9IjUyIiByPSIyIiBmaWxsPSJ3aGl0ZSIvPgogIDxsaW5lIHgxPSIzNCIgeTE9IjUzIiB4Mj0iNTAiIHkyPSI1MyIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxIiB0cmFuc2Zvcm09InJvdGF0ZSgtMzAgNDIgNTUpIi8+CiAgPHJlY3QgeD0iNDgiIHk9IjM1IiB3aWR0aD0iMjAiIGhlaWdodD0iNDAiIHRyYW5zZm9ybT0icm90YXRlKDMwIDU4IDU1KSIgZmlsbD0iI2ZmNDUzYSIgcng9IjIiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxjaXJjbGUgY3g9IjU0IiBjeT0iNTIiIHI9IjIiIGZpbGw9IndoaXRlIi8+CiAgPGNpcmNsZSBjeD0iNjIiIGN5PSI0OCIgcj0iMiIgZmlsbD0id2hpdGUiLz4KICA8bGluZSB4MT0iNTAiIHkxPSI1MyIgeDI9IjY2IiB5Mj0iNTMiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iMSIgdHJhbnNmb3JtPSJyb3RhdGUoMzAgNTggNTUpIi8+CiAgPHBvbHlnb24gcG9pbnRzPSI1MCwxNSA1NCwyNiA2NiwyNiA1NywzMyA2MCw0NSA1MCwzOSA0MCw0NSA0MywzMyAzNCwyNiA0NiwyNiIgZmlsbD0iI2ZmZDcwMCIvPjwvc3ZnPg==">
     <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiBzdHlsZT0iYmFja2dyb3VuZC1jb2xvcjogIzAwMDAwMDsiPgogIDxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjQ4IiBmaWxsPSIjMDAwMDAwIiBzdHJva2U9IiNmZmQ3MDAiIHN0cm9rZS13aWR0aD0iMyIvPgogIDxyZWN0IHg9IjMyIiB5PSIzNSIgd2lkdGg9IjIwIiBoZWlnaHQ9IjQwIiB0cmFuc2Zvcm09InJvdGF0ZSgtMzAgNDIgNTUpIiBmaWxsPSIjMzBkMTU4IiByeD0iMiIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPGNpcmNsZSBjeD0iMzgiIGN5PSI0OCIgcj0iMiIgZmlsbD0id2hpdGUiLz4KICA8Y2lyY2xlIGN4PSI0NiIgY3k9IjUyIiByPSIyIiBmaWxsPSJ3aGl0ZSIvPgogIDxsaW5lIHgxPSIzNCIgeTE9IjUzIiB4Mj0iNTAiIHkyPSI1MyIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxIiB0cmFuc2Zvcm09InJvdGF0ZSgtMzAgNDIgNTUpIi8+CiAgPHJlY3QgeD0iNDgiIHk9IjM1IiB3aWR0aD0iMjAiIGhlaWdodD0iNDAiIHRyYW5zZm9ybT0icm90YXRlKDMwIDU4IDU1KSIgZmlsbD0iI2ZmNDUzYSIgcng9IjIiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxjaXJjbGUgY3g9IjU0IiBjeT0iNTIiIHI9IjIiIGZpbGw9IndoaXRlIi8+CiAgPGNpcmNsZSBjeD0iNjIiIGN5PSI0OCIgcj0iMiIgZmlsbD0id2hpdGUiLz4KICA8bGluZSB4MT0iNTAiIHkxPSI1MyIgeDI9IjY2IiB5Mj0iNTMiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iMSIgdHJhbnNmb3JtPSJyb3RhdGUoMzAgNTggNTUpIi8+CiAgPHBvbHlnb24gcG9pbnRzPSI1MCwxNSA1NCwyNiA2NiwyNiA1NywzMyA2MCw0NSA1MCwzOSA0MCw0NSA0MywzMyAzNCwyNiA0NiwyNiIgZmlsbD0iI2ZmZDcwMCIvPjwvc3ZnPg==">
@@ -268,7 +268,7 @@
 <div class="container">
     <div class="logo-area">
         <div class="logo-icon"></div>
-        <div class="logo-text">DOMINO PRO ANOTA</div>
+        <div class="logo-text">DOMINO PRO SCOREBOARD</div>
     </div>
 
     <div class="top-row">
@@ -369,7 +369,7 @@
 
     let lang = 'EN';
     let bestOf = 5; 
-    let tournament = { scoreA: 0, scoreB: 0, gamesA: 0, gamesB: 0, rounds: [] };
+    let tournament = { scoreA: 0, scoreB: 0, gamesA: 0, gamesB: 0, rounds: [], allRounds: [] };
     let winHistory = [];
     let isProcessingWin = false; 
 
@@ -386,6 +386,17 @@
             const savedNameB = localStorage.getItem('dominoNameB');
             if (savedNameA) document.getElementById('nameA').value = savedNameA;
             if (savedNameB) document.getElementById('nameB').value = savedNameB;
+
+            const savedTournament = localStorage.getItem('dominoTournament');
+            if (savedTournament) {
+                const t = JSON.parse(savedTournament);
+                tournament.scoreA = t.scoreA || 0;
+                tournament.scoreB = t.scoreB || 0;
+                tournament.gamesA = t.gamesA || 0;
+                tournament.gamesB = t.gamesB || 0;
+                tournament.rounds = t.rounds || [];
+                tournament.allRounds = t.allRounds || [];
+            }
         } catch (e) {
             console.error("Data corrupt, resetting");
             localStorage.clear();
@@ -474,7 +485,8 @@
         else tournament.scoreB += pts;
         
         tournament.rounds.push({ team, pts });
-        updateUI(); 
+        tournament.allRounds.push({ type: 'round', team, pts });
+        updateUI();
         
         if (tournament.scoreA >= 200 || tournament.scoreB >= 200) {
             triggerWinSequence(team);
@@ -482,22 +494,34 @@
     };
 
     function triggerWinSequence(team) {
-        isProcessingWin = true; 
+        isProcessingWin = true;
         lockControls(true);
 
-        if (tournament.scoreA >= 200) tournament.gamesA++;
+        const winner = tournament.scoreA >= 200 ? 'A' : 'B';
+        if (winner === 'A') tournament.gamesA++;
         else tournament.gamesB++;
+
+        const currentGameRounds = tournament.rounds.slice();
+        tournament.allRounds.splice(tournament.allRounds.length - currentGameRounds.length, currentGameRounds.length);
+        tournament.allRounds.push({
+            type: 'game_end',
+            winner,
+            gameNum: tournament.gamesA + tournament.gamesB,
+            scoreA: tournament.scoreA,
+            scoreB: tournament.scoreB,
+            rounds: currentGameRounds
+        });
 
         updateUI();
 
-        const winningValId = tournament.scoreA >= 200 ? 'valA' : 'valB';
+        const winningValId = winner === 'A' ? 'valA' : 'valB';
         const winningElement = document.getElementById(winningValId);
         if(winningElement) winningElement.classList.add('winner-anim');
 
         setTimeout(() => {
             const nA = document.getElementById('nameA').value || "Player 1";
             const nB = document.getElementById('nameB').value || "Player 2";
-            const winnerName = tournament.scoreA >= 200 ? nA : nB;
+            const winnerName = winner === 'A' ? nA : nB;
 
             if(winningElement) winningElement.classList.remove('winner-anim');
             tournament.scoreA = 0;
@@ -524,8 +548,23 @@
 
     window.undoLast = function() {
         if (isProcessingWin) return;
+
+        const lastEntry = tournament.allRounds[tournament.allRounds.length - 1];
+
+        if (lastEntry && lastEntry.type === 'game_end') {
+            tournament.allRounds.pop();
+            if (lastEntry.winner === 'A') tournament.gamesA--;
+            else tournament.gamesB--;
+            tournament.scoreA = lastEntry.scoreA;
+            tournament.scoreB = lastEntry.scoreB;
+            tournament.rounds = lastEntry.rounds.slice();
+            updateUI();
+            return;
+        }
+
         if (tournament.rounds.length === 0) return;
         const last = tournament.rounds.pop();
+        tournament.allRounds.pop();
         if (last.team === 'A') tournament.scoreA -= last.pts;
         else tournament.scoreB -= last.pts;
         updateUI();
@@ -538,17 +577,27 @@
         document.getElementById('starsA').innerText = "⭐".repeat(tournament.gamesA);
         document.getElementById('starsB').innerText = "⭐".repeat(tournament.gamesB);
         
-        document.getElementById('historyBody').innerHTML = tournament.rounds.map((r, i) => 
-            `<tr>
-                <td class="round-col">${i+1}</td>
+        let roundNum = 0;
+        const nA = document.getElementById('nameA').value || "P1";
+        const nB = document.getElementById('nameB').value || "P2";
+        document.getElementById('historyBody').innerHTML = tournament.allRounds.map(r => {
+            if (r.type === 'game_end') {
+                roundNum = 0;
+                const winnerName = r.winner === 'A' ? nA : nB;
+                return `<tr><td colspan="3" style="text-align:center;color:var(--gold);font-size:0.7rem;padding:6px;background:#1c1c1e;letter-spacing:1px;font-weight:bold;">🏆 ${winnerName} — Game ${r.gameNum}</td></tr>`;
+            }
+            roundNum++;
+            return `<tr>
+                <td class="round-col">${roundNum}</td>
                 <td class="pts-a">${r.team==='A'?'+'+r.pts:'-'}</td>
                 <td class="pts-b">${r.team==='B'?'+'+r.pts:'-'}</td>
-            </tr>`
-        ).join('');
-        
+            </tr>`;
+        }).join('');
+
         const scrollArea = document.getElementById('scrollArea');
         if(scrollArea) scrollArea.scrollTop = scrollArea.scrollHeight;
 
+        localStorage.setItem('dominoTournament', JSON.stringify(tournament));
         renderWinHistory();
     }
 
@@ -572,12 +621,15 @@
     window.fullReset = function(silent = false) {
         if (silent) {
             tournament.scoreA = 0; tournament.scoreB = 0; tournament.rounds = [];
+            tournament.gamesA = 0; tournament.gamesB = 0; tournament.allRounds = [];
+            localStorage.removeItem('dominoTournament');
             updateUI();
             return;
         }
         showConfirm("Reset entire tournament? / ¿Reiniciar torneo?", () => {
             tournament.scoreA = 0; tournament.scoreB = 0; tournament.rounds = [];
-            tournament.gamesA = 0; tournament.gamesB = 0;
+            tournament.gamesA = 0; tournament.gamesB = 0; tournament.allRounds = [];
+            localStorage.removeItem('dominoTournament');
             updateUI();
         });
     };

@@ -1,6 +1,6 @@
-# Privacy Policy — Domino Pro Anota
+# Privacy Policy — Domino Pro Scoreboard
 
-Domino Pro Anota does not require an account and does not collect personal information.
+Domino Pro Scoreboard does not require an account and does not collect personal information.
 
 The app stores game scores, player names, and match history locally on your device so the scoreboard can function properly. This data is never transmitted to any server.
 
