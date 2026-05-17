@@ -1,0 +1,6 @@
+# All files — repo owner is the default reviewer
+* @rtavare
+
+# CI/CD and GitHub config require explicit review
+.github/ @rtavare
+capacitor.config.ts @rtavare
