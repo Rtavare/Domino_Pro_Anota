@@ -1,2 +1,4 @@
 dist/
 node_modules/
+screenshot*.png
+screenshot.mjs
