@@ -9,6 +9,16 @@ Versioning: [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ## [Unreleased]
 
+### Fixed
+- Align Android CI and release builds with Capacitor 8 requirements:
+  Java 21 and Android SDK 36
+- Align package and Android app versions with the documented `2.1.0` release
+
+### Added
+- Automated scoring reducer tests for points, Capicúa, wins, undo, new games,
+  resets, and invalid entries
+- GitHub Pages production workflow for the `apunta.net` web app
+
 ### Planned
 - iOS native build support (requires macOS runner in CI)
 - Signed Android release APK via GitHub Actions

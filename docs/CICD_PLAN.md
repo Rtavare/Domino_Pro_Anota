@@ -36,7 +36,8 @@ Developer push / PR
 | Component | Status | File |
 |-----------|--------|------|
 | CI — web build + audit | ✅ Live | `.github/workflows/ci.yml` |
-| CI — Android debug APK | ✅ Live | `.github/workflows/ci.yml` |
+| CI — Android debug APK | 🧪 Repair pending verification | `.github/workflows/ci.yml` |
+| Web deploy — GitHub Pages | 🧪 Workflow added | `.github/workflows/pages.yml` |
 | CI failure webhook | ✅ Live | `.github/workflows/ci.yml` |
 | Release pipeline | ✅ Live | `.github/workflows/release.yml` |
 | Release webhook | ✅ Live | `.github/workflows/release.yml` |
@@ -61,12 +62,12 @@ every PR targeting `main`.
 
 ```
 web  ──────────────────────────────────────────────────────────────
-  checkout → setup-node → npm ci → npm audit → vite build
+  checkout → setup-node → npm ci → npm audit → npm test → vite build
   → upload artifact: web-dist-{sha}
 
 android  (needs: web) ────────────────────────────────────────────
-  checkout → setup-node → setup-java 17 → install Android build tools
-  → npm ci → vite build → cap sync android
+  checkout → setup-node → setup-java 21 → install Android SDK 36 build tools
+  → npm ci → vite build → npm test → cap sync android
   → ./gradlew assembleDebug
   → upload artifact: app-debug-{sha}.apk (14-day retention)
 
@@ -77,6 +78,19 @@ notify-failure  (if: failure()) ────────────────
 **Required status checks** (set in branch protection):
 - `Web Build & Security Audit`
 
+### Web Deploy Workflow (`.github/workflows/pages.yml`)
+
+**Triggers:** every push to `main`; manual runs via `workflow_dispatch`.
+
+```
+build ────────────────────────────────────────────────────────────
+  checkout → setup-node → npm ci → npm test → vite build
+  → configure Pages → upload dist artifact
+
+deploy  (needs: build) ───────────────────────────────────────────
+  deploy artifact to GitHub Pages → serve apunta.net
+```
+
 ### Release Workflow (`.github/workflows/release.yml`)
 
 **Trigger:** push of a tag matching `v[0-9]+.[0-9]+.[0-9]+`
@@ -85,7 +99,7 @@ notify-failure  (if: failure()) ────────────────
 
 ```
 build ────────────────────────────────────────────────────────────
-  npm ci → npm audit → vite build → cap sync android
+  npm ci → npm audit → npm test → vite build → cap sync android
   → ./gradlew assembleRelease
   → upload: app-release-unsigned-{tag}.apk
 
@@ -196,10 +210,10 @@ ios:
   runs-on: macos-latest   # only macOS runners have Xcode
   needs: web
   steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
+    - uses: actions/checkout@v6
+    - uses: actions/setup-node@v6
       with:
-        node-version: "20"
+        node-version: "22"
         cache: "npm"
     - run: npm ci && npm run build
     - run: npx cap add ios || true   # already added locally

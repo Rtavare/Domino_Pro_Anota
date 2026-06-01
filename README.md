@@ -34,13 +34,14 @@ Mobile-first domino score tracker. Built with React + Vite, installable as a nat
 
 ### Prerequisites
 
-- Node.js 20+
+- Node.js 22+
 - npm 10+
 
 ### Run in browser
 
 ```bash
 npm install
+npm test
 npm run dev
 ```
 
@@ -57,7 +58,7 @@ npm run preview     # serve the dist locally
 
 ### Android
 
-Requirements: [Android Studio](https://developer.android.com/studio) with Android SDK 35.
+Requirements: [Android Studio](https://developer.android.com/studio) with Android SDK 36 and Java 21.
 
 ```bash
 npm run sync:android    # build web assets + sync into Android project
@@ -113,6 +114,9 @@ See [CHANGELOG.md](CHANGELOG.md) for full version history.
 See **[docs/CICD_PLAN.md](docs/CICD_PLAN.md)** for the complete pipeline design,
 webhook integration guide, and roadmap.
 
+The production web app is deployed to GitHub Pages from the built `dist/`
+artifact. Its custom domain is `apunta.net`.
+
 ---
 
 ## Security
@@ -128,6 +132,7 @@ setup checklist, and secrets management guide.
 domino_pro_anota/
 ├── src/
 │   ├── App.jsx                  # root — all game state (useReducer)
+│   ├── game.js                  # scoring reducer + game constants
 │   ├── index.css                # global styles + design tokens
 │   ├── main.jsx
 │   └── components/
@@ -146,6 +151,8 @@ domino_pro_anota/
 │   └── CODEOWNERS
 ├── docs/
 │   └── CICD_PLAN.md
+├── test/
+│   └── game.test.js             # scoring reducer tests
 ├── capacitor.config.ts
 ├── vite.config.js
 ├── CHANGELOG.md
