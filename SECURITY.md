@@ -39,7 +39,8 @@ The following branch protection rules must be enabled on `main` via
 **GitHub → Settings → Branches → Add rule**:
 
 - ✅ Require pull request before merging
-- ✅ Require status checks to pass (select: `Web Build & Security Audit`)
+- ✅ Require status checks to pass (select: `Web Build & Security Audit`,
+  `Android Debug APK`)
 - ✅ Require branches to be up to date before merging
 - ✅ Do not allow bypassing the above settings
 - ✅ Restrict force pushes
