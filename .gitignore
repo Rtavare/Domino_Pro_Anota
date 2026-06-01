@@ -1,2 +1,27 @@
 dist/
 node_modules/
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+*.der
+*.jks
+*.keystore
+*.mobileprovision
+credentials*.json
+secrets*.json
+service-account*.json
+google-services.json
+GoogleService-Info.plist
+
+# Local tooling
+.npmrc
+.pypirc
+.netrc
