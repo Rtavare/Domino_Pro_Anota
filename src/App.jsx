@@ -17,13 +17,18 @@ const defaultState = {
   gamesWon: [0, 0],
   gameOver: false,
   winnerIdx: null,
+  capicuaBonus: 25,
 }
 
 function gameReducer(state, action) {
   switch (action.type) {
+    case 'SET_CAPICUA_BONUS': {
+      const value = Math.min(200, Math.max(0, action.value))
+      return { ...state, capicuaBonus: value }
+    }
     case 'ADD_POINTS': {
       const { teamIdx, points, capicua } = action
-      const bonus = capicua ? 25 : 0
+      const bonus = capicua ? state.capicuaBonus : 0
       const total = points + bonus
       const newTeams = state.teams.map((t, i) =>
         i === teamIdx ? { ...t, score: t.score + total } : t
@@ -169,6 +174,27 @@ export default function App() {
           ))}
         </div>
 
+        <div className="capicua-setting">
+          <span className="capicua-setting-label">⭐ Capicúa bonus</span>
+          {game.rounds.length === 0 ? (
+            <div className="capicua-setting-control">
+              <button
+                className="capicua-adj"
+                onClick={() => dispatch({ type: 'SET_CAPICUA_BONUS', value: game.capicuaBonus - 5 })}
+                disabled={game.capicuaBonus <= 0}
+              >−</button>
+              <span className="capicua-setting-val">{game.capicuaBonus}</span>
+              <button
+                className="capicua-adj"
+                onClick={() => dispatch({ type: 'SET_CAPICUA_BONUS', value: game.capicuaBonus + 5 })}
+                disabled={game.capicuaBonus >= 200}
+              >+</button>
+            </div>
+          ) : (
+            <span className="capicua-setting-locked">+{game.capicuaBonus} pts 🔒</span>
+          )}
+        </div>
+
         <div className="actions-row">
           <button
             className="btn-undo"
@@ -186,6 +212,7 @@ export default function App() {
         <PointEntryModal
           team={game.teams[entryFor]}
           teamIdx={entryFor}
+          capicuaBonus={game.capicuaBonus}
           onSubmit={handleAddPoints}
           onClose={() => setEntryFor(null)}
         />

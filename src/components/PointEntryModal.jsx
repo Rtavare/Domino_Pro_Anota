@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 
-export default function PointEntryModal({ team, teamIdx, onSubmit, onClose }) {
+export default function PointEntryModal({ team, teamIdx, capicuaBonus = 25, onSubmit, onClose }) {
   const [points, setPoints] = useState('')
   const [capicua, setCapicua] = useState(false)
   const inputRef = useRef()
@@ -10,7 +10,7 @@ export default function PointEntryModal({ team, teamIdx, onSubmit, onClose }) {
   }, [])
 
   const num = parseInt(points) || 0
-  const total = num + (capicua ? 25 : 0)
+  const total = num + (capicua ? capicuaBonus : 0)
   const canSubmit = num > 0
 
   const handleSubmit = () => {
@@ -48,7 +48,7 @@ export default function PointEntryModal({ team, teamIdx, onSubmit, onClose }) {
 
         {capicua && num > 0 && (
           <div className="capicua-preview">
-            {num} + 25 = <strong>{total}</strong> pts
+            {num} + {capicuaBonus} = <strong>{total}</strong> pts
           </div>
         )}
 
@@ -58,7 +58,7 @@ export default function PointEntryModal({ team, teamIdx, onSubmit, onClose }) {
         >
           ⭐ CAPICÚA
           <div className="capicua-detail">
-            {capicua ? '+25 bonus activated!' : 'Last tile fits both sides'}
+            {capicua ? `+${capicuaBonus} bonus activated!` : 'Last tile fits both sides'}
           </div>
         </button>
 
