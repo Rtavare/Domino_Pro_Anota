@@ -11,8 +11,8 @@
     "open:android": "npx cap open android"
   },
   "dependencies": {
-    "@capacitor/android": "^8.3.4",
-    "@capacitor/cli": "^8.3.4",
+    "@capacitor/android": "^8.4.2",
+    "@capacitor/cli": "^8.4.2",
     "@capacitor/core": "^8.3.4",
     "react": "^18.3.0",
     "react-dom": "^18.3.0"
