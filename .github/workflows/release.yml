@@ -17,7 +17,7 @@ jobs:
       version: ${{ steps.version.outputs.tag }}
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Extract version
         id: version
@@ -69,7 +69,7 @@ jobs:
     needs: build
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Download APK artifact
         uses: actions/download-artifact@v8
